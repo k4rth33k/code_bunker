@@ -1,2 +1,2 @@
-# test
-first repository
+# PROBLEM REPOSITORY
+A simple collection of various problems
