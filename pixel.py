@@ -59,7 +59,7 @@ def main():
 			fill(op, (x,y), n, avg)
 
 	op.show()
-	op.save(name + '_edit.jpg')
+	op.save(name.split('.')[0] + '_edit.jpg')
 
 if __name__ == '__main__':
 	main()
