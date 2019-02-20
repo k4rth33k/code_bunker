@@ -1,7 +1,7 @@
 #############################
 # Python Image Pixelator    #
 # Version: 0.0.0            #
-# Author: k4rht33k          #
+# Author: k4rth33k          #
 '''                         #
 Supported File Types:       #
 File types supported by the #
