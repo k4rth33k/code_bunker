@@ -11,3 +11,4 @@ with open('sample.log', 'w') as fp:
 
 im = Image.new(mode="RGB", size=(200, 200))
 im.save('test.jpg')
+print('Finished')
