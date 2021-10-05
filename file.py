@@ -2,9 +2,11 @@ import time
 from PIL import Image
 
 with open('/tmp/tempfile.txt', 'w') as fp:
+    print('Writing to tempfile')
     fp.write('This is from /tmp/tempfile.txt')
 
 with open('sample.log', 'w') as fp:
+    print('Writing to sample.log')
     fp.write('This is from sample.log')
 
 # time.sleep(10)
