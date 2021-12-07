@@ -14,6 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: build
-      run: docker run -d --rm -p 80:8080 nginx 
+      run: docker run -p 8080:80 -d --rm --name my_nginx3 nginx 
     - name: check
-      run: curl -X GET "http://localhost:8080"
+      run: curl -v http://localhost:8080
