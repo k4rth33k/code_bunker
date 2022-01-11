@@ -9,6 +9,9 @@ from PIL import Image
 from torch.utils.data import Dataset, DataLoader
 from torchvision.models import resnet50
 import glob
+import scaletorch as st
+
+st.init()
 
 
 def get_train_transform():
@@ -33,13 +36,13 @@ class ImageDataset(Dataset):
     def __init__(self, transforms=None):
         super().__init__()
         self.transforms = transforms
-        self.imgs = glob.glob('./data/**')
+        self.imgs = st.list_files('s3://stfs-test/xray-dataset')
 
     def __getitem__(self, idx):
         
         image_name = self.imgs[idx]
         
-        with open(image_name, 'rb') as file:
+        with st.open(f's3://{image_name}', 'rb') as file:
             img = Image.open(io.BytesIO(file.read()))
         img = img.resize((224, 224)).convert('RGB')
 
@@ -119,9 +122,12 @@ def main():
         acc = np.mean(epoch_acc)
 
         if epoch % 3 == 0:
-            torch.save(model.state_dict(), f'Epoch_{epoch}.pth')
+            st.save(model.state_dict(), f'Epoch_{epoch}.pth', metadata={'epoch' : epoch, 'loss' : loss})
 
         print(f"Epoch: {epoch + 1} | Loss: {loss} | Acc: {acc} | Time: {total_time} ")
+        st.track(epoch=epoch, 
+                metrics={'loss' : loss, 'acc' : 'acc'}, 
+                tuner_default='loss')
 
 
 if __name__ == '__main__':
