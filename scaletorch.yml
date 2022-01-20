@@ -1,0 +1,44 @@
+entrypoint: mnist.py
+name: my-sweep
+gpusPerTrial: 1
+requirements: requirements.txt
+gpuTypes:
+  - V100
+useSpot: false
+
+cloudProviders: 
+  - name: DATACRUNCH
+    region: FIN1
+
+environment:
+  PLATFORM_API: http://221b-2405-201-c014-8156-1c93-9f18-d12b-fd2.ngrok.io
+  ST_API_KEY: a52aee105d3ff01f
+
+maxCost: 50
+maxTime: 1h25m
+
+preJobCommands:
+  - apt-get update -y
+  - apt-get install nano
+
+postJobCommands:
+  - curl --upload-file ./your-file.txt https://free.keep.sh 
+
+sweep:
+  searchSpace:
+    batch_size:
+      type: choice
+      value: [16, 32, 64, 128]
+    hidden_size:
+      type: choice
+      value: [128, 256, 512, 1024]
+    lr:
+      type: choice
+      value: [0.0001, 0.001, 0.01, 0.1]
+    momentum:
+      type: uniform
+      value: [0, 1]
+
+  tuner:                          
+    name: TPE                                     
+    optimizeMode: maximize     
