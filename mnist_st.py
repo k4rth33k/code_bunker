@@ -16,8 +16,8 @@ from nni.utils import merge_parameter
 from torchvision import datasets, transforms
 import os
 
-os.environ['PLATFORM_API'] = 'http://1c59-2405-201-c014-8156-88af-d032-2e70-43d7.ngrok.io'
-os.environ['ST_API_KEY'] = 'a52aee105d3ff01f'
+#os.environ['PLATFORM_API'] = 'http://1c59-2405-201-c014-8156-88af-d032-2e70-43d7.ngrok.io'
+#os.environ['ST_API_KEY'] = 'a52aee105d3ff01f'
 
 import scaletorch as st
 st.init()

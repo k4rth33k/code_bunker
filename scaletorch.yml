@@ -1,4 +1,4 @@
-entrypoint: mnist.py
+entrypoint: mnist_st.py
 name: my-sweep
 gpusPerTrial: 1
 requirements: requirements.txt
