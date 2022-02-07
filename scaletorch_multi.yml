@@ -5,16 +5,22 @@ maxGpus: 24
 requirements: requirements.txt
 gpuTypes:
   - V100
+  - K80
+  - M60
 
 useSpot: false
 cuda: 11.3
 
-
 cloudProviders: 
-  - name: DATACRUNCH
+  - name: AZURE
     region:
+      - eastus
+      - southcentralus
+      
+  - name: DATACRUNCH
+    region: 
       - FIN1
-     
+
 
 environment:
   PLATFORM_API: http://fbdc-2405-201-c014-8156-3b4-d450-8ef8-c384.ngrok.io

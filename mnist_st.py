@@ -14,13 +14,9 @@ import torch.nn.functional as F
 import torch.optim as optim
 from nni.utils import merge_parameter
 from torchvision import datasets, transforms
-import os
-
-#os.environ['PLATFORM_API'] = 'http://1c59-2405-201-c014-8156-88af-d032-2e70-43d7.ngrok.io'
-#os.environ['ST_API_KEY'] = 'a52aee105d3ff01f'
 
 import scaletorch as st
-st.init()
+st.init(verbose=None)
 
 logger = logging.getLogger('mnist_AutoML')
 
@@ -125,6 +121,11 @@ def main(args):
         st.track(epoch, {'test_acc' : test_acc}, 'test_acc')
         logger.debug('test accuracy %g', test_acc)
         logger.debug('Pipe send intermediate result done.')
+
+        # if epoch % 3 == 0:
+        logger.debug('Saving model')
+        st.torch.load(model.state_dict(), 'model.pth', metadata={'test_acc' : test_acc})
+
 
     # report final result
     # nni.report_final_result(test_acc)
