@@ -124,7 +124,7 @@ def main(args):
 
         # if epoch % 3 == 0:
         logger.debug('Saving model')
-        st.torch.load(model.state_dict(), 'model.pth', metadata={'test_acc' : test_acc})
+        st.torch.save(model.state_dict(), 'model.pth', metadata={'test_acc' : test_acc})
 
 
     # report final result

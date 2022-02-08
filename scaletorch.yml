@@ -1,7 +1,7 @@
-entrypoint: mnist.py
+entrypoint: mnist_st.py
 name: my-sweep
 gpusPerTrial: 2
-maxGpus: 24
+maxGpus: 4
 requirements: requirements.txt
 gpuTypes:
   - V100
@@ -9,16 +9,14 @@ gpuTypes:
 useSpot: false
 cuda: 11.3
 
-
 cloudProviders: 
   - name: DATACRUNCH
     region:
       - FIN1
-     
 
 environment:
-  PLATFORM_API: http://fbdc-2405-201-c014-8156-3b4-d450-8ef8-c384.ngrok.io
-  ST_API_KEY: a52aee105d3ff01f
+  PLATFORM_API: http://platform-api-loadbalancer-1708204133.us-east-1.elb.amazonaws.com
+  ST_API_KEY: OUR9NENAU28POFI690A3CZEMQMLW96LR
 
 maxCost: 50
 maxTime: 1h25m
