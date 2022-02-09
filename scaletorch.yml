@@ -1,11 +1,10 @@
-entrypoint: mnist_st.py
+entrypoint: torch_with_stfs.py
 name: my-sweep
-gpusPerTrial: 1
+gpusPerTrial: 0
 maxGpus: 5
 requirements: requirements.txt
 gpuTypes:
   - V100
-
 
 useSpot: false
 cuda: 11.3
