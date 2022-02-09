@@ -39,7 +39,7 @@ class ImageDataset(Dataset):
         super().__init__()
         print('Initializing ')
         self.transforms = transforms
-        self.imgs = st.list_files('gs://st-opendataset/c1.staticflickr.com/', 'st-opendataset/c1.staticflickr.com/**.jpg')[:100]
+        self.imgs = st.list_files('gs://st-opendataset/c1.staticflickr.com/', 'st-opendataset/c1.staticflickr.com/**.jpg')
 
     def __getitem__(self, idx):
         image_name = self.imgs[idx]
