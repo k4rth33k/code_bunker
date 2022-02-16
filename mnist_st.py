@@ -12,6 +12,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+from torch.utils.tensorboard import SummaryWriter
 from nni.utils import merge_parameter
 from torchvision import datasets, transforms
 
@@ -19,7 +20,6 @@ import scaletorch as st
 st.init(verbose=None)
 
 logger = logging.getLogger('mnist_AutoML')
-
 
 class Net(nn.Module):
     def __init__(self, hidden_size):
@@ -112,12 +112,15 @@ def main(args):
     optimizer = optim.SGD(model.parameters(), lr=args['lr'],
                           momentum=args['momentum'])
 
+    writer = SummaryWriter(f'{st.get_artifacts_dir()}/tensorboard')
+
     for epoch in range(1, args['epochs'] + 1):
         train(args, model, device, train_loader, optimizer, epoch)
         test_acc = test(args, model, device, test_loader)
 
         # report intermediate result
         # nni.report_intermediate_result(test_acc)
+        writer.add_scalar('test_acc', test_acc, epoch)
         st.track(epoch, {'test_acc' : test_acc}, 'test_acc')
         logger.debug('test accuracy %g', test_acc)
         logger.debug('Pipe send intermediate result done.')
@@ -131,6 +134,7 @@ def main(args):
     # nni.report_final_result(test_acc)
     logger.debug('Final result is %g', test_acc)
     logger.debug('Send final result done.')
+    writer.close()
 
 
 def get_params():

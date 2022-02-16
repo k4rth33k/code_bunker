@@ -1,22 +1,30 @@
-entrypoint: torch_with_stfs.py
-name: my-sweep
-gpusPerTrial: 0
-maxGpus: 5
+entrypoint: mnist_st.py
+name: azure-stfs-test
+gpusPerTrial: 1
+maxGpus: 4
 requirements: requirements.txt
 gpuTypes:
   - V100
+  - K80
+  - M60
 
 useSpot: false
 cuda: 11.3
 
 cloudProviders: 
-  - name: DATACRUNCH
+  - name: AZURE
     region: 
-     - FIN1
+     - eastus
+     - southcentralus
+  
+#  - name: DATACRUNCH
+#    region: 
+#     - FIN1
+
     
 environment:
-  PLATFORM_API: http://platform-api-loadbalancer-1708204133.us-east-1.elb.amazonaws.com
   ST_API_KEY: OUR9NENAU28POFI690A3CZEMQMLW96LR
+  PLATFORM_API: http://platform-api-loadbalancer-1708204133.us-east-1.elb.amazonaws.com
 
 maxCost: 50
 maxTime: 1h25m
