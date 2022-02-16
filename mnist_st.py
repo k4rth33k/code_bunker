@@ -15,6 +15,7 @@ import torch.optim as optim
 from torch.utils.tensorboard import SummaryWriter
 from nni.utils import merge_parameter
 from torchvision import datasets, transforms
+import time
 
 import scaletorch as st
 st.init(verbose=None)
@@ -128,7 +129,8 @@ def main(args):
         # if epoch % 3 == 0:
         logger.debug('Saving model')
         st.torch.save(model.state_dict(), 'model.pth', metadata={'test_acc' : test_acc})
-
+        
+        time.sleep(70)
 
     # report final result
     # nni.report_final_result(test_acc)
