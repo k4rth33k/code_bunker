@@ -1,5 +1,5 @@
-entrypoint: mnist_st.py
-name: azure-hpt-test-23
+entrypoint: torch_with_stfs.py
+name: sample-job
 gpusPerTrial: 1
 maxGpus: 1
 requirements: requirements.txt
@@ -9,21 +9,9 @@ gpuTypes:
 useSpot: false
 cuda: 11.3
 
-codeTransfer:
-  type: GITHUB_PRIVATE
-  repo: git@github.com:k4rth33k/code_bunker.git
-  commit: a2b761415f057c7f76db68ff3ca2403e3358d324
-  credentials:
-    GITHUB_PAT: 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
-    TEST: ABCD
-
-# minVCPUs: 32
-# minMemory: 64
-# maxCPUWorkers: 8
-
 visualisation:
   type: TENSORBOARD
-  startWithJob: False
+  startWithJob: True
 
 # customImage:
 #   image: your_registry.com/docker_image
@@ -33,15 +21,15 @@ visualisation:
 #     password: pass
 
 cloudProviders: 
-#  - name: GCP
-#    regions:
-#     - us-central1
-  
- - name: AZURE
-   regions:
-    # - eastus
-    - southcentralus
+  - name: GCP
+    regions:
+    - us-central1
+    - asia-east2 
 
+#  - name: AZURE
+#    regions:
+#    - eastus
+#    - southcentralus
  
 environment:
   ST_API_KEY: OUR9NENAU28POFI690A3CZEMQMLW96LR
@@ -75,9 +63,3 @@ sweep:
   tuner:                          
     name: TPE                                     
     optimizeMode: maximize     
-
-# experiment:
-#   args:
-#     batch_size: [16, 32]
-#     hidden_size: [128, 256]
-#     lr: [0.0001, 0.001, 0.01, 0.1]
