@@ -1,0 +1,45 @@
+name: ubuntu-ws-test
+gpuCount: 1
+# entrypoint: mnist_st.py
+# gpusPerTrial: 1
+# maxGpus: 1
+requirements: requirements.txt
+numWorkstations: 1
+gpuTypes:
+  - K80
+
+# visualisation: TENSORBOARD
+  # type: TENSORBOARD
+  # startWithJob: True
+
+# useSpot: false
+# cuda: 11.3
+
+minvCPUs: 4
+minMemory: 4
+maxCPUWorkers: 1
+
+customImage:
+  image: ubuntu:18.04
+  # credentials:
+  #   registry: ''
+  #   username: k4rth33k123
+  #   password: 9LhfvHP3qmnZaJS
+
+bareBone: False
+cloudProviders: 
+
+  # - name: GCP
+  #   regions:
+  #   - us-central1
+
+  - name: AWS
+    regions:
+    - us-east-1
+
+# environment:
+#   ST_API_KEY: OUR9NENAU28POFI690A3CZEMQMLW96LR
+#   PLATFORM_API: http://platform-api-loadbalancer-1708204133.us-east-1.elb.amazonaws.com
+
+# maxCost: 50
+# maxTime: 1h25m
